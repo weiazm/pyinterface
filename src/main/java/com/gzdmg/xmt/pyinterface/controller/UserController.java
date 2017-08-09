@@ -4,14 +4,18 @@ import javax.annotation.Resource;
 import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.HttpSession;
 
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ctc.wstx.util.StringUtil;
 import com.gzdmg.xmt.pyinterface.service.IUserService;
+
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -69,6 +73,14 @@ public class UserController {
 			return "error";
 		}
 		return "success";
+	}
+	
+	@RequestMapping("/test.json")
+	@ResponseBody
+	public Map<String, Object> test(){
+		Map<String, Object> result = Maps.newHashMap();
+		result.put("ssy", "dsb");
+		return result;
 	}
 
 }
