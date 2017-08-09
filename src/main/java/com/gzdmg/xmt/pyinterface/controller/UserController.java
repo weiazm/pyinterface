@@ -1,21 +1,23 @@
 package com.gzdmg.xmt.pyinterface.controller;
 
-import javax.annotation.Resource;
-import javax.naming.spi.DirStateFactory.Result;
-import javax.servlet.http.HttpSession;
-
 import com.google.common.collect.Maps;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.ctc.wstx.util.StringUtil;
+import com.gzdmg.xmt.pyinterface.model.TextItem;
+import com.gzdmg.xmt.pyinterface.response.WebResponse;
+import com.gzdmg.xmt.pyinterface.service.ITextItemService;
 import com.gzdmg.xmt.pyinterface.service.IUserService;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -82,5 +84,27 @@ public class UserController {
 		result.put("ssy", "dsb");
 		return result;
 	}
+	
+    @Autowired
+    private ITextItemService iTextItemService;
 
+    @RequestMapping("/getTextItem.json")
+    @ResponseBody
+    public WebResponse<?> getTextItem(@RequestParam(required = false) Long textItemId) {
+        WebResponse response = new WebResponse<>();
+        if (null == textItemId) {
+            return response.error("textItemId is null!");
+        }
+        try {
+            TextItem textItem = iTextItemService.getOne(textItemId);
+            if (null == textItem) {
+                return response.error(String.format("can not find textItem by id:%s", textItemId));
+            }
+            return response.success(textItem);
+        } catch (Exception e) {
+            logger.error("getTextItem error:{}", e);
+            return response.error(e.getMessage());
+        }
+    }
+	
 }
