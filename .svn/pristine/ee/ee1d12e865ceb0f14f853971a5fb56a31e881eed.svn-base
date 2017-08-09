@@ -1,0 +1,14 @@
+# jdbc.X
+jdbc.driverClassName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost/panyu?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&zeroDateTimeBehavior=convertToNull
+jdbc.user=root
+jdbc.pass=123456
+
+# hibernate.X
+hibernate.connection.driverClass=org.gjt.mm.mysql.Driver
+hibernate.connection.url=jdbc:mysql://localhost/panyu
+hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+hibernate.connection.username=root
+hibernate.connection.password=123456
+hibernate.show_sql=true
+hibernate.hbm2ddl.auto=update
