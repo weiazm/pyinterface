@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -74,9 +75,11 @@ public class TextItem implements Serializable {
 	@JoinTable(name="tb_text_collection",
 	joinColumns={@JoinColumn(name="tid")}, 
 	inverseJoinColumns={@JoinColumn(name="cid")})
+	@JsonIgnore
 	private List<Collection> collections;
 	
 	@OneToMany(mappedBy="textItem")
+	@JsonIgnore
 	private List<TemplateItem> templateItem;
 	
 	//所属集合名称 

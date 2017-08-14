@@ -1,5 +1,7 @@
 package com.gzdmg.xmt.pyinterface.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -51,6 +53,7 @@ public class TemplateItem implements Serializable {
 	private Date createdDate = new Date();
 
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="tpid")
 	private Template template;
 

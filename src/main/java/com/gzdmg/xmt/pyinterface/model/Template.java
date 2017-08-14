@@ -1,5 +1,7 @@
 package com.gzdmg.xmt.pyinterface.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +34,7 @@ public class Template implements Serializable {
 	@OneToMany(mappedBy="template")
 	private List<TemplateItem> templateItems;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="template")
 	private List<Module> modules;
 

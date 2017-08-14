@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 @Entity
@@ -61,9 +62,11 @@ public class VideoItem implements Serializable {
 	@JoinTable(name="tb_video_collection",
 	joinColumns={@JoinColumn(name="vid")}, 
 	inverseJoinColumns={@JoinColumn(name="cid")})
+	@JsonIgnore
 	private List<Collection> collections;
 	
 	@OneToMany(mappedBy="videoItem")
+	@JsonIgnore
 	private List<TemplateItem> templateItem;
 
 	public Long getId() {

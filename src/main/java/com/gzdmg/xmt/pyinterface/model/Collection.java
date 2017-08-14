@@ -1,5 +1,7 @@
 package com.gzdmg.xmt.pyinterface.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -49,6 +51,7 @@ public class Collection implements Serializable {
 	private List<VideoItem> videoItems;
 	
 	@OneToMany(mappedBy="collection")
+	@JsonIgnore
 	private List<TemplateItem> templateItem;
 
 	public Long getId() {
